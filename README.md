@@ -9,6 +9,8 @@ Apache access log parser in Python 3.
 * 400 Blue
 * 500 Magenta
 
+Methods other than POST and GET are highlighted in red.
+
 ### Example output
 
 ![Parsing apache apache2 logs](https://raw.githubusercontent.com/mnmnc/img/master/log.jpg)
