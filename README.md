@@ -14,8 +14,8 @@ Methods other than POST and GET are highlighted in red.
 ### Required Python modules
 
 * [colorama](https://pypi.python.org/pypi/colorama) 
-* socket [buildin]
-* re     [buildin]
+* socket [build-in]
+* re     [build-in]
  
 
 
