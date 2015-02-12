@@ -35,8 +35,23 @@ def get_hostname( ip ):
 			return new_host
 
 def get_agent(agent_string):
+	if "Firefox/" in agent_string:
+		return "Firefox"
+	elif "MSIE" in agent_string:
+		return "IE"
+	elif "Seamonkey/" in agent_string:
+		return "Seamonkey"
+	elif "Chrome/" in agent_string and "Chromium" not in agent_string:
+		return "Chrome"
+	elif "Chromium/" in agent_string:
+		return "Chromium"
+	elif "Safari/" in agent_string and "Chrome" not in agent_string and "Chromium" not in agent_string:
+		return "Safari"
+	elif "OPR/" in agent_string or "Opera/" in agent_string:
+		return "Opera"
+	else:
+		return "UNKNWN"
 
-	return "Firefox"
 
 # READ FILE
 with open(log_path, 'rt') as log:
