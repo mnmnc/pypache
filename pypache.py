@@ -42,14 +42,14 @@ def get_agent(agent_string):
 with open(log_path, 'rt') as log:
 	text = log.read()
  
-# 185.31.48.30 - imr [12/Feb/2015:15:42:38 +0100] "GET /rt/rutorrent/plugins/diskspace/action.php?_=1423752158361 HTTP/1.1" 200 329 
-# "https://jane.duckdns.org/rt/rutorrent/" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0"
-#
+
 # FOR EACH LINE
 for line in text.split("\n"):
 	if len(line) > 5:
 
 		try:
+
+			# BUILDING DATA
 			splitted = line.split("\"")
 
 			first = splitted[0].split(" ")
