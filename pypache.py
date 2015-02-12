@@ -48,24 +48,30 @@ with open(log_path, 'rt') as log:
 # FOR EACH LINE
 for line in text.split("\n"):
 	if len(line) > 5:
-		splitted = line.split("\"")
 
-		first = splitted[0].split(" ")
-		ip = first[0]
-		user = first[2]
-		date = first[3] + first[4]
+		try:
+			splitted = line.split("\"")
 
-		request = splitted[1]
-		resp_code = splitted[2]
-		ref = splitted[3]
-		agent = get_agent(splitted[5])
+			first = splitted[0].split(" ")
+			ip = first[0]
+			user = first[2]
+			date = first[3] + first[4]
 
-		print("IP:", ip)
-		print("User:", user)
-		print("date:", date)
-		print("request:", request)
-		print("resp_code:", resp_code)
-		print("referrer:", ref)
-		print("agent:", agent)
-		print()
+			request = splitted[1]
+			resp_code = splitted[2]
+			ref = splitted[3]
+			agent = get_agent(splitted[5])
 
+
+			print(date, end="")
+			print(resp_code, end="")
+			print(agent, end=" ")
+			print(ip, end=" ")
+			print(get_hostname(ip), end=" ")
+			print(user, end=" ")
+			print(ref, end=" ")
+			print(request, end=" ")
+			print()
+
+		except:
+			pass
