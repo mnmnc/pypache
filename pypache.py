@@ -39,86 +39,16 @@ def get_hostname( ip ):
 with open(log_path, 'rt') as log:
     text = log.read();
  
+# 185.31.48.30 - imr [12/Feb/2015:15:42:38 +0100] "GET /rt/rutorrent/plugins/diskspace/action.php?_=1423752158361 HTTP/1.1" 200 329 
+# "https://jane.duckdns.org/rt/rutorrent/" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0"
+#
 # FOR EACH LINE
 for line in text.split("\n"):
-    if len(line) > 5:
- 
-        # PARSE LINE AND ADJUST FIELD LENGTH
-        ip      = adjust_item( re.match( regex, line ).group( 1 ), 15 )
-        hostname    = adjust_item( str(get_hostname(ip.strip())), 30 )
-        date        = (re.match( regex, line ).group( 2 )).split(" ")[0]
-        request     = adjust_item( re.match( regex, line ).group( 3 ), 40 )
-        code        = adjust_item( re.match( regex, line ).group( 4 ), 4 )
-        size        = adjust_item( re.match( regex, line ).group( 5 ), 8 )
-        ref     = adjust_item( re.match( regex, line ).group( 6 ), 30 )
-        agent       = adjust_item( re.match( regex, line ).group( 7 ), 3 )
- 
-        # HTTP 200 OK
-        if code.strip()[0] == "2":
- 
-            print( date + " " , end="")
-            print( Fore.GREEN + Style.BRIGHT + code[:4] + Fore.RESET + Style.NORMAL, end="" )
-            print( ip[:15] + " " , end="")
-            print( hostname[:30] + " " , end="")
-            print( size[:8] + " " , end="")
- 
-            # CHECK IF METHOD USED IS GET | POST
-            if request[0] == "G" or request[0] == "P" :
-                print( request[:40] + " " , end="")
-            else:
-                # OTHER METHODS PRINT IN COLOR
-                print( Back.BLACK + Fore.RED + Style.DIM + request[:40] + Fore.RESET + Back.RESET + Style.NORMAL + " ", end="" )
- 
-            print( ref[:30] + " ", end="")
-            print( agent[:3])
- 
-        # HTTP 300
-        elif code.strip()[0] == "3":
-            print( date + " " , end="")
-            print( Fore.YELLOW + Style.BRIGHT + code[:4] + Fore.RESET + Style.NORMAL,  end="" )
-            print( ip[:15] + " " , end="")
-            print( hostname[:30] + " " , end="")
-            print( size[:8] + " " , end="")
-            print( request[:40] + " " , end="")
-            print( ref[:30] + " ", end="")
-            print( agent[:3])
- 
-        # HTTP 400
-        elif code.strip()[0] == "4":
-            print( date + " " , end="")
-            print( Fore.BLUE + Style.BRIGHT + code[:4] + Fore.RESET + Style.NORMAL,  end="" )
-            print( ip[:15] + " " , end="")
-            print( hostname[:30] + " " , end="")
-            print( size[:8] + " " , end="")
- 
-            # CHECK IF METHOD USED IS GET | POST
-            if request[0] == "G" or request[0] == "P" :
-                print( request[:40] + " " , end="")
-            else:
-                # OTHER METHODS PRINT IN COLOR
-                new_request=Fore.RED + request[:40] + Fore.RESET
-                print( new_request + " " , end="")
-            print( ref[:30] + " ", end="")
-            print( agent[:3])
- 
-        # HTTP 500
-        elif code.strip()[0] == "5":
-            print( date+ " " , end="")
-            print( Fore.MAGENTA + Style.BRIGHT + code[:4] + Fore.RESET + Style.NORMAL ,  end="" )
-            print( ip[:15] + " " , end="")
-            print( hostname[:30] + " " , end="")
-            print( size[:8] + " " , end="")
-            print( request[:40] + " " , end="")
-            print( ref[:30] + " ", end="")
-            print( agent[:3])
- 
-        # OTHER
-        else:
-            print( date + " " , end="")
-            print( code[:4],  end="" )
-            print( ip[:15] + " " , end="")
-            print( hostname[:30] + " " , end="")
-            print( size[:8] + " " , end="")
-            print( request[:40] + " " , end="")
-            print( ref[:30] + " ", end="")
-            print( agent[:3])
+	if len(line) > 5:
+		splitted = line.split("\"")
+		print("First part", splitted[0])
+		print("Request part", splitted[1])
+		print("Code part", splitted[2])
+		print("Referer part", splitted[3])
+		print("Agent part", splitted[5])
+	
