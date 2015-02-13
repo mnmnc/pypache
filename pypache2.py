@@ -111,7 +111,7 @@ class PyPache:
 
 			t_method = ele['method'][0]
 
-			t_referrer = self.transformer.adjust_item(  (ele['referrer']).split("/")[2],
+			t_referrer = self.transformer.adjust_item(  ((ele['referrer']).split("/"))[2],
 														self.limits['minimal']['referrer']
 													)[:self.limits['minimal']['referrer']]
 
@@ -156,7 +156,7 @@ class PyPache:
 
 			t_protocol = ele['protocol']
 
-			t_referrer = self.transformer.adjust_item(  (ele['referrer']).split("/")[2],
+			t_referrer = self.transformer.adjust_item(  ((ele['referrer']).split("/"))[2],
 														self.limits['maximal']['referrer']
 													)[:self.limits['maximal']['referrer']]
 
