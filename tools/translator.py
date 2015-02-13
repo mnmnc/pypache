@@ -37,4 +37,4 @@ class Translator:
 		elif "OPR/" in agent_string or "Opera/" in agent_string:
 			return ("Opera", '0')
 		else:
-			return (agent_string.strip(), '0')
+			return (agent_string.strip(), '-1')
