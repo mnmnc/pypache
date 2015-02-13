@@ -32,7 +32,7 @@ class PyPache:
 				ip = temp_list[0]
 				host = self.translator.ip_to_hostname(ip)
 				user = temp_list[2]
-				date = temp_list[3] + " " + temp_list[4]
+				date = temp_list[3][1:7] + " " + temp_list[3][13:21]
 				method = temp_list[5]
 				file = temp_list[6]
 				protocol = temp_list[7]
@@ -56,26 +56,41 @@ class PyPache:
 				})
 
 
-	def set_limits(self):
+	def set_limits(self, term_size):
 
 		minimal = {
 			'protocol': 3,
 		    'method': 1,
-		    'file': 20,
-		    'user': 5,
-		    'hostname': 20,
+		    'file': 10,
+		    'user': 3,
+		    'hostname': 10,
 		    'agent': 4,
 		    'referrer': 10
 		}
 
+			#- print(t_date, end=' ')
+			#- print(t_code, end=' ')
+			#+ print(t_method, end=' ')
+			#+ print(t_protocol, end=' ')
+			#+ print(t_user, end=' ')
+			#+ print(t_agent, end=' ')
+			#- print(t_ip, end=' ')
+			# print(t_hostname, end=' ')
+			# print(t_referrer, end=' ')
+			# print(t_file, end=' ')
+			# print()
+
+		left = term_size - 16 - 4 - 16 - 6 - 8 - 6 - 11 -1
+		#                 date code ip  meth pro use agent
+
 		maximal = {
 			'protocol': 8,
 		    'method': 6,
-		    'file': 40,
-		    'user': 10,
-		    'hostname': 40,
+		    'file': int(left/3),
+		    'user': 5,
+		    'hostname': int(left/4),
 		    'agent': 10,
-		    'referrer': 30
+		    'referrer': int(left/3)
 		}
 
 		self.limits.update({
@@ -118,10 +133,10 @@ class PyPache:
 
 			print(t_date, end=' ')
 			print(t_code, end=' ')
-			print(t_size, end=' ')
+			#print(t_size, end=' ')
 			print(t_method, end=' ')
-			print(t_protocol, end=' ')
-			print(t_user, end=' ')
+			#print(t_protocol, end=' ')
+			#print(t_user, end=' ')
 			print(t_agent, end=' ')
 			print(ele['agent'][1], end=' ')
 			print(t_ip, end=' ')
@@ -163,11 +178,9 @@ class PyPache:
 
 			t_code = ele['code']
 			t_date = ele['date']
-			t_size = self.transformer.adjust_item(ele['size'], 6)
 
 			print(t_date, end=' ')
 			print(t_code, end=' ')
-			print(t_size, end=' ')
 			print(t_method, end=' ')
 			print(t_protocol, end=' ')
 			print(t_user, end=' ')
@@ -192,14 +205,14 @@ class PyPache:
 
 		return [first, second, third]
 
-	def multiline(self):
+	def multiline(self, term_size):
 
 		for ele in self.data:
 
 			final_lines = [
-				self.create_list(210),
-			    self.create_list(210),
-			    self.create_list(210)
+				self.create_list(term_size-1),
+			    self.create_list(term_size-1),
+			    self.create_list(term_size-1)
 			]
 
 			current_line = 0
@@ -298,7 +311,7 @@ class PyPache:
 
 
 			for line in final_lines:
-				if line.count(' ') < 210:
+				if line.count(' ') < term_size-1:
 					for letter in line:
 						print(letter, end='')
 					print()
@@ -325,17 +338,18 @@ def main():
 
 	pypache = PyPache(log_path)
 	pypache.load_log()
-	pypache.set_limits()
+	pypache.set_limits(os.get_terminal_size()[0])
 
 
 	if args.wide:
 		pypache.maximal()
 	elif args.multiline:
-		pypache.multiline()
+		pypache.multiline(os.get_terminal_size()[0])
 	else:
 		pypache.minimal()
 
-	print(os.get_terminal_size()[0])
+	#print(os.get_terminal_size()[0])
+
 
 if __name__ == "__main__":
 
