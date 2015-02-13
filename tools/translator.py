@@ -23,18 +23,18 @@ class Translator:
 
 	def get_agent(self, agent_string):
 		if "Firefox/" in agent_string:
-			return "Firefox"
+			return ("Firefox", agent_string[agent_string.find("Firefox/")+8:agent_string.find("Firefox/")+10])
 		elif "MSIE" in agent_string:
-			return "IE"
+			return ("IE", agent_string[agent_string.find("MSIE")+5:agent_string.find("Firefox/")+7])
 		elif "Seamonkey/" in agent_string:
-			return "Seamonkey"
+			return ("Seamonkey", agent_string[agent_string.find("Seamonkey/")+10:agent_string.find("Seamonkey/")+12])
 		elif "Chrome/" in agent_string and "Chromium" not in agent_string:
-			return "Chrome"
+			return ("Chrome", agent_string[agent_string.find("Chrome/")+7:agent_string.find("Chrome/")+9])
 		elif "Chromium/" in agent_string:
-			return "Chromium"
+			return ("Chromium", agent_string[agent_string.find("Chromium/")+9:agent_string.find("Chromium/")+11])
 		elif "Safari/" in agent_string and "Chrome" not in agent_string and "Chromium" not in agent_string:
-			return "Safari"
+			return ("Safari", agent_string[agent_string.find("Safari/")+7:agent_string.find("Safari/")+9])
 		elif "OPR/" in agent_string or "Opera/" in agent_string:
-			return "Opera"
+			return ("Opera", 0)
 		else:
-			return "UNKNWN"
+			return agent_string

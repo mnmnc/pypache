@@ -34,6 +34,7 @@ class PyPache:
 				code = temp_list[8]
 				size = temp_list[9]
 
+
 				self.data.append({
 					"ip": ip.strip(),
 					"hostname": host.strip(),
@@ -45,7 +46,7 @@ class PyPache:
 				    "code": code.strip(),
 				    "size": size.strip(),
 				    'referrer': referrer.strip(),
-				    'agent': (self.translator.get_agent(user_agent)).strip()
+				    'agent': (self.translator.get_agent(user_agent))
 
 				})
 
@@ -109,17 +110,13 @@ class PyPache:
 														self.limits['minimal']['referrer']
 													)[:self.limits['minimal']['referrer']]
 
-			t_agent = self.transformer.adjust_item(  ele['agent'],
+			t_agent = self.transformer.adjust_item(  ele['agent'][0],
 														self.limits['minimal']['agent']
 													)[:self.limits['minimal']['agent']]
 
 			t_user = self.transformer.adjust_item(  ele['user'],
 														self.limits['minimal']['user']
 													)[:self.limits['minimal']['user']]
-
-			t_method = self.transformer.adjust_item(  ele['method'],
-														self.limits['minimal']['method']
-													)[:self.limits['minimal']['method']]
 
 			t_file = self.transformer.adjust_item(  ele['file'],
 														self.limits['minimal']['file']
@@ -136,6 +133,7 @@ class PyPache:
 			print(t_protocol, end=' ')
 			print(t_user, end=' ')
 			print(t_agent, end=' ')
+			print(ele['agent'][1], end=' ')
 			print(t_ip, end=' ')
 			print(t_hostname, end=' ')
 			print(t_referrer, end=' ')
@@ -158,7 +156,7 @@ class PyPache:
 														self.limits['maximal']['referrer']
 													)[:self.limits['maximal']['referrer']]
 
-			t_agent = self.transformer.adjust_item(  ele['agent'],
+			t_agent = self.transformer.adjust_item(  ele['agent'][0],
 														self.limits['maximal']['agent']
 													)[:self.limits['maximal']['agent']]
 
@@ -185,6 +183,7 @@ class PyPache:
 			print(t_protocol, end=' ')
 			print(t_user, end=' ')
 			print(t_agent, end=' ')
+			print(ele['agent'][1], end=' ')
 			print(t_ip, end=' ')
 			print(t_hostname, end=' ')
 			print(t_referrer, end=' ')
@@ -246,8 +245,8 @@ class PyPache:
 			current_offset += len(t_protocol) + 1
 
 			# AGENT
-			if len(ele['agent']) > self.limits["maximal"]['agent']:
-				divided = self.string_to_string_list(ele['agent'], self.limits["maximal"]['agent'])
+			if len(ele['agent'][0]) > self.limits["maximal"]['agent']:
+				divided = self.string_to_string_list(ele['agent'][0], self.limits["maximal"]['agent'])
 				if len(divided[0]) > 0:
 					final_lines[0][current_offset:current_offset+len(divided[0])] = divided[0]
 				if len(divided[1]) > 0:
@@ -255,7 +254,7 @@ class PyPache:
 				if len(divided[2]) > 0:
 					final_lines[2][current_offset:current_offset+len(divided[2])] = divided[2]
 			else:
-				final_lines[0][current_offset:current_offset+self.limits["maximal"]['agent']] = self.transformer.adjust_item(ele['agent'], self.limits["maximal"]['agent'])
+				final_lines[0][current_offset:current_offset+self.limits["maximal"]['agent'] + 3] = self.transformer.adjust_item(ele['agent'][0] +' '+ ele['agent'][1], self.limits["maximal"]['agent'] + 3)
 
 			current_offset += self.limits["maximal"]['agent'] + 1
 
@@ -277,13 +276,6 @@ class PyPache:
 				final_lines[0][current_offset:current_offset+self.limits["maximal"]['hostname']] = self.transformer.adjust_item(ele['hostname'], self.limits["maximal"]['hostname'])
 
 			current_offset += self.limits["maximal"]['hostname'] + 1
-
-
-
-
-
-
-
 
 
 			# FILE
