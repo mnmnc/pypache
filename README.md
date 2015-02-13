@@ -4,7 +4,7 @@ Apache access log parser in Python 3.
 
 ### Version 2.0 in development.
 
-For the simplicity sake if you want to use this script, add following line to `/etc/apache2/apache2.cfg`:
+For the simplicity sake, if you want to use *pypache*, add following line to `/etc/apache2/apache2.cfg`:
 
 `LogFormat "%h %l %u %t %r %>s %O | %{Referer}i | %{User-Agent}i" pypache`
 
