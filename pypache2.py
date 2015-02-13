@@ -26,7 +26,7 @@ class PyPache:
 				line_list = line.split("|")
 
 				temp_list = (line_list[0]).split(" ")
-				referrer = line_list[1]
+				referrer = (line_list[1]).strip()
 				user_agent = line_list[2]
 
 				ip = temp_list[0]
@@ -39,6 +39,8 @@ class PyPache:
 				code = temp_list[8]
 				size = temp_list[9]
 
+				if len(referrer) > 2 and referrer.find("http") == 0:
+					referrer = referrer.split("/")[2]
 
 				self.data.append({
 					"ip": ip.strip(),
@@ -50,7 +52,7 @@ class PyPache:
 				    "protocol": protocol.strip(),
 				    "code": code.strip(),
 				    "size": size.strip(),
-				    'referrer': (referrer.strip()).split("/")[2],
+				    'referrer': referrer.strip(),
 				    'agent': (self.translator.get_agent(user_agent))
 
 				})
