@@ -25,7 +25,7 @@ class Translator:
 		if "Firefox/" in agent_string:
 			return ("Firefox", agent_string[agent_string.find("Firefox/")+8:agent_string.find("Firefox/")+10])
 		elif "MSIE" in agent_string:
-			return ("IExplorer", agent_string[agent_string.find("MSIE")+5:agent_string.find("MSIE/")+7])
+			return ("IExplorer", agent_string[agent_string.find("MSIE")+5:agent_string.find("MSIE")+7])
 		elif "Seamonkey/" in agent_string:
 			return ("Seamonkey", agent_string[agent_string.find("Seamonkey/")+10:agent_string.find("Seamonkey/")+12])
 		elif "Chrome/" in agent_string and "Chromium" not in agent_string:
