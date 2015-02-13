@@ -21,7 +21,7 @@ class Translator:
 				self.previous_host = ip
 				return new_host
 
-	def get_agent(agent_string):
+	def get_agent(self, agent_string):
 		if "Firefox/" in agent_string:
 			return "Firefox"
 		elif "MSIE" in agent_string:
