@@ -80,17 +80,17 @@ class PyPache:
 			# print(t_file, end=' ')
 			# print()
 
-		left = term_size - 16 - 4 - 16 - 6 - 8 - 6 - 11 -1
+		left = term_size - 16 - 4 - 16 - 6 - 8 - 6 - 11
 		#                 date code ip  meth pro use agent
 
 		maximal = {
 			'protocol': 8,
 		    'method': 6,
-		    'file': int(left/3),
+		    'file': int(left/3) -1,
 		    'user': 5,
-		    'hostname': int(left/4),
+		    'hostname': int(left/4) -1,
 		    'agent': 10,
-		    'referrer': int(left/3)
+		    'referrer': int(left/3) -1
 		}
 
 		self.limits.update({
@@ -160,9 +160,9 @@ class PyPache:
 														self.limits['maximal']['referrer']
 													)[:self.limits['maximal']['referrer']]
 
-			t_agent = self.transformer.adjust_item(  ele['agent'][0],
-														self.limits['maximal']['agent']
-													)[:self.limits['maximal']['agent']]
+			t_agent = self.transformer.adjust_item(  ele['agent'][0] +' ' + ele['agent'][1],
+														self.limits['maximal']['agent'] + 3
+													)[:self.limits['maximal']['agent'] + 3]
 
 			t_user = self.transformer.adjust_item(  ele['user'],
 														self.limits['maximal']['user']
@@ -185,7 +185,6 @@ class PyPache:
 			print(t_protocol, end=' ')
 			print(t_user, end=' ')
 			print(t_agent, end=' ')
-			print(ele['agent'][1], end=' ')
 			print(t_ip, end=' ')
 			print(t_hostname, end=' ')
 			print(t_referrer, end=' ')
@@ -257,7 +256,7 @@ class PyPache:
 				if len(divided[2]) > 0:
 					final_lines[2][current_offset:current_offset+len(divided[2])] = divided[2]
 			else:
-				final_lines[0][current_offset:current_offset+self.limits["maximal"]['agent'] + 3] = self.transformer.adjust_item(ele['agent'][0] +' '+ ele['agent'][1], self.limits["maximal"]['agent'] + 3)
+				final_lines[0][current_offset:current_offset+self.limits["maximal"]['agent'] + 3] = self.transformer.adjust_item(ele['agent'][0] +' '+ ele['agent'][1], self.limits["maximal"]['agent']+3)
 
 			current_offset += self.limits["maximal"]['agent'] + 1
 
