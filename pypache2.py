@@ -2,6 +2,7 @@
 from tools import transformer
 from tools import translator
 import os
+import argparse
 
 
 class PyPache:
@@ -12,8 +13,12 @@ class PyPache:
 	limits = {}
 
 	def __init__(self, log_path):
-		with open(log_path, 'rt') as log_file:
-			self.log = log_file.read()
+		try:
+			with open(log_path, 'rt') as log_file:
+				self.log = log_file.read()
+		except:
+			print("File not found.")
+			os._exit(1)
 
 	def load_log(self):
 		for line in self.log.split("\n"):
@@ -50,21 +55,6 @@ class PyPache:
 
 				})
 
-		for ele in self.data:
-			print(ele)
-
-
-		# splitted = line.split("\"")
-		#
-		# first = splitted[0].split(" ")
-		# ip = first[0]
-		# user = first[2]
-		# date = first[3] + first[4]
-		#
-		# request = splitted[1]
-		# resp_code = splitted[2]
-		# ref = splitted[3]
-		# agent = get_agent(splitted[5])
 
 	def set_limits(self):
 
@@ -142,7 +132,6 @@ class PyPache:
 
 
 	def maximal(self):
-
 		for ele in self.data:
 			t_ip = self.transformer.adjust_item( ele['ip'], 15)[:15]
 
@@ -204,6 +193,7 @@ class PyPache:
 		return [first, second, third]
 
 	def multiline(self):
+
 		for ele in self.data:
 
 			final_lines = [
@@ -307,31 +297,45 @@ class PyPache:
 			current_offset += self.limits["maximal"]['referrer'] + 1
 
 
-
-
-
-
 			for line in final_lines:
 				if line.count(' ') < 210:
 					for letter in line:
 						print(letter, end='')
 					print()
 
-
+def nparse():
+	"""Parses arguments"""
+	usage = " pypache.py [-s | --small | -w | --wide | -m | --multiline ]"
+	parser = argparse.ArgumentParser(description=usage)
+	parser.add_argument('-s', "--small", action='store_true', default=True, help='Show smalles output possible.')
+	parser.add_argument('-w', "--wide", action='store_true', default=False, help='Show wide output.')
+	parser.add_argument('-m', "--multiline", action='store_true', default=False, help='Show multiline output. Longer values like referrer are divided into lines.')
+	parser.add_argument('-p', "--path", metavar='additional_paths', default=[None], nargs='*', help='Change the log path.')
+	args = parser.parse_args()
+	return args
 
 def main():
 
+	global args
+	args = nparse()
+
 	log_path = "apache.log"
+	if args.path[0] is not None:
+		log_path = args.path[0]
 
 	pypache = PyPache(log_path)
 	pypache.load_log()
 	pypache.set_limits()
-	# pypache.minimal()
-	# pypache.maximal()
 
-	pypache.multiline()
 
-	#print(os.get_terminal_size()[0])
+	if args.wide:
+		pypache.maximal()
+	elif args.multiline:
+		pypache.multiline()
+	else:
+		pypache.minimal()
+
+	print(os.get_terminal_size()[0])
 
 if __name__ == "__main__":
 

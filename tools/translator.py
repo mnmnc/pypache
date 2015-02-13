@@ -35,6 +35,6 @@ class Translator:
 		elif "Safari/" in agent_string and "Chrome" not in agent_string and "Chromium" not in agent_string:
 			return ("Safari", agent_string[agent_string.find("Safari/")+7:agent_string.find("Safari/")+9])
 		elif "OPR/" in agent_string or "Opera/" in agent_string:
-			return ("Opera", 0)
+			return ("Opera", '0')
 		else:
-			return (agent_string, 0)
+			return (agent_string, '0')
