@@ -20,6 +20,23 @@ Now restart apache: `service apache2 restart`
 
 From this point your log file format will change. It will be easier to parse the values.
 
+### Usage of version 2.0
+```bash
+usage: pypache2.py [-h] [-s] [-w] [-m]
+                   [-p [additional_paths [additional_paths ...]]]
+
+pypache.py [-s | --small | -w | --wide | -m | --multiline ]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s, --small           Show smalles output possible.
+  -w, --wide            Show wide output.
+  -m, --multiline       Show multiline output. Longer values like referrer are
+                        divided into lines.
+  -p [additional_paths [additional_paths ...]], --path [additional_paths [additional_paths ...]]
+                        Change the log path.
+
+```
 
 ### Legacy info below this line
 
