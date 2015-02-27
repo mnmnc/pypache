@@ -1,6 +1,0 @@
-18.1.4.0 - r [13/Feb/2015:12:00:17 +0100] POST /rt/rutorrent/plugins/history/action.php HTTP/1.1 200 308 | https://.duckdns.org/rt/rutorrent/ | Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
-18.1.4.0 - r [13/Feb/2015:12:00:17 +0100] GET /rt/rutorrent/plugins/cpuload/action.php?_= HTTP/1.1 200 297 | https://.duckdns.org/rt/rutorrent/ | Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
-18.1.4.0 - r [13/Feb/2015:12:00:17 +0100] GET /rt/rutorrent/plugins/tracklabels/action.php?tracker=.net HTTP/1.1 304 130 | https://.duckdns.org/rt/rutorrent/ | Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
-18.1.4.0 - r [13/Feb/2015:12:00:16 +0100] POST /rt/rutorrent/plugins/check_port/action.php HTTP/1.1 200 314 | https://.duckdns.org/rt/rutorrent/ | Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
-18.1.4.0 - r [13/Feb/2015:12:00:17 +0100] GET /rt/rutorrent/plugins/tracklabels/action.php?tracker= HTTP/1.1 304 130 | https://.duckdns.org/rt/rutorrent/ | Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
-18.1.4.0 - r [13/Feb/2015:12:00:17 +0100] POST /rt/rutorrent/plugins/rss/action.php HTTP/1.1 200 319 | https://.duckdns.org/rt/rutorrent/ | Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
