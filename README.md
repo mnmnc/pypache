@@ -2,7 +2,7 @@
 
 Apache access log parser in Python 3.
 
-### Version 2.0 in development.
+### Version 2.0 released. No color support for now.
 
 For the simplicity sake, if you want to use *pypache*, add following line to `/etc/apache2/apache2.cfg`:
 
