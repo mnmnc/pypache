@@ -29,33 +29,36 @@ class PyPache:
 				referrer = (line_list[1]).strip()
 				user_agent = line_list[2]
 
-				ip = temp_list[0]
-				host = self.translator.ip_to_hostname(ip)
-				user = temp_list[2]
-				date = temp_list[3][1:7] + " " + temp_list[3][13:21]
-				method = temp_list[5]
-				file = temp_list[6]
-				protocol = temp_list[7]
-				code = temp_list[8]
-				size = temp_list[9]
+				try:
+					ip = temp_list[0]
+					host = self.translator.ip_to_hostname(ip)
+					user = temp_list[2]
+					date = temp_list[3][1:7] + " " + temp_list[3][13:21]
+					method = temp_list[5]
+					file = temp_list[6]
+					protocol = temp_list[7]
+					code = temp_list[8]
+					size = temp_list[9]
 
-				if len(referrer) > 2 and referrer.find("http") == 0:
-					referrer = referrer.split("/")[2]
+					if len(referrer) > 2 and referrer.find("http") == 0:
+						referrer = referrer.split("/")[2]
 
-				self.data.append({
-					"ip": ip.strip(),
-					"hostname": host.strip(),
-					"user": user.strip(),
-				    "date": date.strip(),
-				    "method": method.strip(),
-				    "file": file.strip(),
-				    "protocol": protocol.strip(),
-				    "code": code.strip(),
-				    "size": size.strip(),
-				    'referrer': referrer.strip(),
-				    'agent': (self.translator.get_agent(user_agent))
+					self.data.append({
+						"ip": ip.strip(),
+						"hostname": host.strip(),
+						"user": user.strip(),
+					    "date": date.strip(),
+					    "method": method.strip(),
+					    "file": file.strip(),
+					    "protocol": protocol.strip(),
+					    "code": code.strip(),
+					    "size": size.strip(),
+					    'referrer': referrer.strip(),
+					    'agent': (self.translator.get_agent(user_agent))
 
-				})
+					})
+				except:
+					pass
 
 
 	def set_limits(self, term_size):
